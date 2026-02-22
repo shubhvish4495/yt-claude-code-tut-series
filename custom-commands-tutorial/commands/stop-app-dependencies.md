@@ -1,1 +1,1 @@
-Stop this application on local using steps defined in README.md. 
+Stop this application on local using steps defined in docs/README.md. 

@@ -1,359 +1,231 @@
-# Go Tutorial - PostgreSQL Database Connection
+# Claude Code Tutorial
 
-A simple Go application that demonstrates connecting to PostgreSQL database with structured logging and configurable environment variables.
+A hands-on tutorial designed to help developers master **[Claude Code](https://claude.com/claude-code)** through practical examples. This repository demonstrates how to effectively collaborate with Claude Code to build, maintain, and evolve software projects using real-world scenarios.
 
-## Features
+## 🎯 What You'll Learn About Claude Code
 
-- PostgreSQL database connection using `lib/pq` driver
-- Configurable database connection parameters via environment variables
-- Structured JSON logging using Go's standard `log/slog` package
-- Connection pooling with optimized settings
-- Comprehensive error handling and logging
-- Health check with database ping
+This repository serves as a practical playground for mastering Claude Code's capabilities:
 
-## Prerequisites
+### 1. **Project Setup & Scaffolding**
+- How Claude Code can initialize projects with proper structure
+- Setting up development toolchains (Makefiles, Docker, etc.)
+- Creating and managing configuration files
 
-- Go 1.25.7 or later
-- PostgreSQL database (local installation or Docker)
+### 2. **Code Development & Enhancement**
+- Writing clean, maintainable code with Claude Code's assistance
+- Implementing features through natural language descriptions
+- Adding new functionality to existing projects
 
-## Quick Start
+### 3. **Code Analysis & Understanding**
+- Using Claude Code to understand existing codebases
+- Identifying and fixing bugs through conversation
+- Code review and optimization suggestions
 
-### 1. Clone and Setup
+### 4. **DevOps & Deployment**
+- Managing Docker containers and services
+- Setting up development and production environments
+- Implementing best practices for deployment
 
-```bash
-# Navigate to project directory
-cd go-tut/claude-tut
+## 🚀 Getting Started
 
-# Download dependencies
-go mod tidy
+### Prerequisites
+- A modern development environment
+- Docker and Docker Compose (for services)
+- Basic familiarity with command line tools
+
+### Quick Start
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd claude-tut
+   ```
+
+2. **Start the services** (using Docker)
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **Run the application**
+   ```bash
+   make run
+   ```
+
+4. **Test the endpoints**
+   ```bash
+   # Health check
+   curl http://localhost:8080/health
+
+   # API endpoints
+   curl http://localhost:8080/users
+   ```
+
+## 📝 Claude Code Learning Examples
+
+Here are practical examples you can try with Claude Code using this project:
+
+### Example 1: Adding a New Feature
+**Prompt:** "Add a new API endpoint to create resources"
+
+Claude Code will:
+1. Analyze the existing code structure
+2. Add the new handler function
+3. Update the routing configuration
+4. Include proper error handling and validation
+5. Test the new functionality
+
+### Example 2: Code Optimization
+**Prompt:** "Optimize the database connection handling for better performance"
+
+Claude Code will:
+1. Review current database patterns
+2. Suggest connection pooling improvements
+3. Add proper timeout configurations
+4. Implement retry mechanisms
+
+### Example 3: Adding Tests
+**Prompt:** "Create comprehensive tests for the API handlers"
+
+Claude Code will:
+1. Create test files following best practices
+2. Mock external dependencies
+3. Test various scenarios (success, error cases)
+4. Add comprehensive test coverage
+
+## 📂 Project Structure
+
+```
+claude-tut/
+├── main.go              # Main application entry point
+├── Makefile            # Development commands
+├── docker-compose.yml  # Service configuration
+├── init.sql            # Database initialization
+├── start.sh            # Startup script
+├── CLAUDE.md           # Claude Code specific instructions
+└── README.md           # This file
 ```
 
-### 2. Database Setup Options
+## 🔧 Available Commands
 
-#### Option A: Using Docker (Recommended for Development)
-
-Create and run a PostgreSQL container:
-
+### Using Make (Recommended)
 ```bash
-# Run PostgreSQL in Docker
-docker run --name tutorial-postgres \
-  -e POSTGRES_USER=postgres \
-  -e POSTGRES_PASSWORD=password \
-  -e POSTGRES_DB=tutorial_db \
-  -p 5432:5432 \
-  -d postgres:15-alpine
-
-# Verify container is running
-docker ps
+make help           # Show all available commands
+make run            # Run the application
+make build          # Build the application
+make dev            # Full development workflow
+make test           # Run tests
+make deps           # Download dependencies
+make clean          # Clean build artifacts
 ```
 
-#### Option B: Using Docker Compose
-
-Create a `docker-compose.yml` file:
-
-```yaml
-version: '3.8'
-services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: tutorial-postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: tutorial_db
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-volumes:
-  postgres_data:
-```
-
-Run with Docker Compose:
-
+### Direct Commands
 ```bash
-# Start PostgreSQL
-docker-compose up -d
-
-# Stop PostgreSQL
-docker-compose down
-```
-
-#### Option C: Local PostgreSQL Installation
-
-If you have PostgreSQL installed locally:
-
-```bash
-# Start PostgreSQL service (varies by OS)
-# macOS with Homebrew:
-brew services start postgresql
-
-# Ubuntu/Debian:
-sudo systemctl start postgresql
-
-# Create database
-psql -U postgres -c "CREATE DATABASE tutorial_db;"
-```
-
-### 3. Environment Configuration
-
-Copy the example environment file:
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env` file with your database credentials:
-
-```bash
-# PostgreSQL Database Configuration
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=password
-DB_NAME=tutorial_db
-DB_SSLMODE=disable
-```
-
-### 4. Run the Application
-
-#### Using Make (Recommended)
-
-```bash
-# Run the application
+# Run the application directly
 make run
 
 # Build the application
 make build
 
-# Run development workflow (format, vet, build)
-make dev
+# Manage dependencies
+make deps
 
-# Clean build artifacts
-make clean
-
-# See all available targets
-make help
+# Run tests
+make test
 ```
 
-#### Using Go Commands Directly
+## 🐳 Service Setup
 
+The project includes containerized services for easy development:
+
+### Start Services
 ```bash
-# Run directly
-go run main.go
+# Start all services
+docker-compose up -d
 
-# Build and run
-go build -o claude-tut main.go
-./claude-tut
+# Start specific services
+docker-compose up -d database
 
-# Run with custom environment variables
-DB_HOST=localhost DB_PORT=5432 go run main.go
+# Start with additional tools (optional)
+docker-compose --profile tools up -d
 ```
 
-#### Using Environment Variables
+### Configuration
+Default connection settings (customizable via environment variables):
+- **Host:** localhost
+- **Port:** Application-specific
+- **Database:** Configured via Docker Compose
+- **Other services:** See docker-compose.yml
 
-You can override any configuration using environment variables:
-
+### Environment Variables
 ```bash
-# Run with custom database settings
-DB_HOST=192.168.1.100 \
-DB_PORT=5433 \
-DB_USER=myuser \
-DB_PASSWORD=mypassword \
-DB_NAME=mydb \
-go run main.go
+export DB_HOST=localhost
+export DB_PORT=5432
+export DB_USER=postgres
+export DB_PASSWORD=password
+export DB_NAME=tutorial_db
+export PORT=8080
 ```
 
-## Configuration
+## 🎓 Learning Path with Claude Code
 
-The application uses the following environment variables:
+### Beginner Level
+1. **Code Understanding:** Ask Claude Code to explain existing functions and patterns
+2. **Simple Modifications:** Change response messages, add logging, or update configurations
+3. **Configuration:** Modify environment variables and settings
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `DB_HOST` | `localhost` | PostgreSQL server hostname |
-| `DB_PORT` | `5432` | PostgreSQL server port |
-| `DB_USER` | `postgres` | Database username |
-| `DB_PASSWORD` | `password` | Database password |
-| `DB_NAME` | `tutorial_db` | Database name |
-| `DB_SSLMODE` | `disable` | SSL mode (disable, require, verify-ca, verify-full) |
+### Intermediate Level
+1. **Feature Addition:** Add new API endpoints or functionality
+2. **Error Handling:** Improve error responses and validation
+3. **Testing:** Create unit and integration tests
 
-## Project Structure
+### Advanced Level
+1. **Architecture Changes:** Restructure code for better maintainability
+2. **Performance Optimization:** Improve queries, caching, and response times
+3. **Production Features:** Add authentication, rate limiting, monitoring
 
-```
-claude-tut/
-├── main.go              # Main application file
-├── go.mod              # Go module definition
-├── go.sum              # Go module checksums
-├── .env.example        # Environment variables template
-├── README.md           # This file
-├── Makefile           # Build and development commands
-└── CLAUDE.md          # Claude Code instructions
-```
+## 💡 Tips for Using Claude Code
 
-## Code Overview
+1. **Be Specific:** Provide clear requirements for better results
+2. **Iterative Development:** Build features incrementally
+3. **Ask for Explanations:** Don't hesitate to ask "why" and "how"
+4. **Code Review:** Ask Claude Code to review your changes
+5. **Best Practices:** Request adherence to coding conventions and patterns
 
-### Database Connection (`main.go:32-80`)
+## 📚 What This Tutorial Demonstrates
 
-- Configurable PostgreSQL connection with environment variables
-- Connection pooling (25 max open/idle connections)
-- Connection health checking with `db.Ping()`
-- Comprehensive error handling and logging
+Through practical examples, you'll learn how Claude Code helps with:
 
-### Logging
+- **Clean Architecture:** Organizing code with proper separation of concerns
+- **Error Handling:** Implementing comprehensive error handling patterns
+- **Logging:** Setting up structured logging for production applications
+- **Database Integration:** Creating safe and efficient database operations
+- **API Development:** Building well-structured API endpoints
+- **Configuration Management:** Managing environment-based configuration
+- **Development Workflow:** Establishing complete development and deployment processes
 
-The application uses structured JSON logging:
+## 🤝 Contributing
 
-```json
-{
-  "time": "2026-02-21T13:34:04.980896+05:30",
-  "level": "INFO",
-  "source": {
-    "function": "main.main",
-    "file": "/path/to/main.go",
-    "line": 51
-  },
-  "msg": "Successfully connected to PostgreSQL database"
-}
-```
+This is a Claude Code learning repository! Feel free to:
+- Practice adding new features with Claude Code's help
+- Improve existing code through Claude Code collaboration
+- Create examples of effective Claude Code prompts
+- Add more comprehensive tests using Claude Code
+- Enhance documentation with Claude Code assistance
 
-## Development
+When contributing, try using Claude Code to:
+1. Analyze the impact of your changes
+2. Ensure code quality and consistency
+3. Update related documentation
+4. Create appropriate tests
 
-### Available Make Targets
+## 📖 Additional Resources
 
-```bash
-make run      # Run the application
-make build    # Build the application binary
-make dev      # Full development workflow
-make test     # Run tests (when available)
-make fmt      # Format code
-make vet      # Run static analysis
-make deps     # Download and organize dependencies
-make clean    # Clean build artifacts
-make help     # Show all available targets
-```
+- [Claude Code Documentation](https://docs.claude.com/en/docs/claude-code)
+- [Docker Documentation](https://docs.docker.com/)
+- [Database Documentation](https://www.postgresql.org/docs/)
+- [API Design Best Practices](https://restfulapi.net/)
 
-### Adding New Features
+---
 
-This application provides a foundation with database connectivity. You can extend it by:
+**Happy learning with Claude Code!** 🚀
 
-1. Adding HTTP handlers for web API endpoints
-2. Implementing database models and operations
-3. Adding authentication and middleware
-4. Creating business logic services
-
-## Troubleshooting
-
-### Common Issues
-
-#### 1. Database Connection Failed
-
-```
-ERROR Failed to connect to database error="failed to ping database: ..."
-```
-
-**Solutions:**
-- Verify PostgreSQL is running: `docker ps` or `pg_isready`
-- Check connection parameters in `.env` file
-- Ensure database exists: `psql -U postgres -l`
-- Verify network connectivity: `telnet localhost 5432`
-
-#### 2. Permission Denied
-
-```
-ERROR Failed to connect to database error="pq: password authentication failed"
-```
-
-**Solutions:**
-- Verify username and password in `.env` file
-- Check PostgreSQL user permissions
-- Ensure database user has access to the specified database
-
-#### 3. Database Does Not Exist
-
-```
-ERROR Failed to connect to database error="pq: database \"tutorial_db\" does not exist"
-```
-
-**Solutions:**
-- Create the database: `psql -U postgres -c "CREATE DATABASE tutorial_db;"`
-- Or update `DB_NAME` in `.env` to an existing database
-
-#### 4. Port Already in Use
-
-If using Docker and port 5432 is occupied:
-
-```bash
-# Use a different port
-docker run --name tutorial-postgres \
-  -e POSTGRES_USER=postgres \
-  -e POSTGRES_PASSWORD=password \
-  -e POSTGRES_DB=tutorial_db \
-  -p 5433:5432 \
-  -d postgres:15-alpine
-
-# Update .env file
-DB_PORT=5433
-```
-
-### Docker Commands
-
-```bash
-# View PostgreSQL logs
-docker logs tutorial-postgres
-
-# Connect to PostgreSQL container
-docker exec -it tutorial-postgres psql -U postgres -d tutorial_db
-
-# Stop and remove container
-docker stop tutorial-postgres
-docker rm tutorial-postgres
-
-# Remove PostgreSQL data volume
-docker volume rm tutorial-postgres-data
-```
-
-### Database Operations
-
-```bash
-# Connect to database
-psql -h localhost -U postgres -d tutorial_db
-
-# List databases
-\l
-
-# List tables
-\dt
-
-# Exit psql
-\q
-```
-
-## Next Steps
-
-This application provides a solid foundation for building Go applications with PostgreSQL. Consider adding:
-
-- HTTP server with REST API endpoints
-- Database migrations
-- User authentication
-- Business logic and services
-- Unit and integration tests
-- Docker containerization for the Go application
-- CI/CD pipeline
-
-## License
-
-This project is part of a Go tutorial and is intended for educational purposes.
-
-## Support
-
-For issues and questions:
-1. Check the troubleshooting section above
-2. Verify your PostgreSQL setup
-3. Review the logs for detailed error messages
-4. Ensure all environment variables are correctly set
+This tutorial grows with you as you explore the powerful collaboration between human creativity and AI assistance in software development.
