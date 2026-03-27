@@ -4,8 +4,8 @@ This directory contains files for creating an animated notification when Claude 
 
 ## Files
 
-- `claude-attention.html` - Animated HTML notification page with beautiful UI
-- `claude-attention.sh` - Cross-platform shell script to launch the notification
+- `claude-scripts/claude-attention.html` - Animated HTML notification page with beautiful UI
+- `claude-scripts/claude-attention.sh` - Cross-platform shell script to launch the notification
 - `NOTIFICATION_SETUP.md` - This documentation file
 
 ## Features
@@ -45,7 +45,7 @@ Edit your `.claude/settings.local.json` file to replace the current notification
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/ssaurav/go-tut/claude-tut/claude-attention.sh"
+            "command": "/Users/ssaurav/go-tut/claude-tut/claude-scripts/claude-attention.sh"
           }
         ]
       }
@@ -82,7 +82,7 @@ To keep both the dialog and the animated notification:
           },
           {
             "type": "command",
-            "command": "/Users/ssaurav/go-tut/claude-tut/claude-attention.sh"
+            "command": "/Users/ssaurav/go-tut/claude-tut/claude-scripts/claude-attention.sh"
           }
         ]
       }
@@ -104,7 +104,7 @@ If you want to use a relative path (useful if you move the project):
         "hooks": [
           {
             "type": "command",
-            "command": "./claude-attention.sh"
+            "command": "./claude-scripts/claude-attention.sh"
           }
         ]
       }
@@ -119,12 +119,12 @@ To test if the notification works correctly:
 
 1. Make sure the script is executable:
    ```bash
-   chmod +x claude-attention.sh
+   chmod +x claude-scripts/claude-attention.sh
    ```
 
 2. Test the script manually:
    ```bash
-   ./claude-attention.sh
+   ./claude-scripts/claude-attention.sh
    ```
 
 3. The notification should:
@@ -135,7 +135,7 @@ To test if the notification works correctly:
 ## How It Works
 
 1. **Hook Trigger**: When Claude needs attention, the hook system executes the configured command
-2. **Script Execution**: The `claude-attention.sh` script runs and:
+2. **Script Execution**: The `claude-scripts/claude-attention.sh` script runs and:
    - Detects the operating system
    - Opens the HTML file in the default browser
    - Sends a desktop notification (if available)
@@ -146,7 +146,7 @@ To test if the notification works correctly:
 
 ### Modifying the Animation
 
-Edit `claude-attention.html` to customize:
+Edit `claude-scripts/claude-attention.html` to customize:
 - Colors in the CSS variables
 - Animation timing and effects
 - Message text
@@ -154,7 +154,7 @@ Edit `claude-attention.html` to customize:
 
 ### Modifying the Script
 
-Edit `claude-attention.sh` to:
+Edit `claude-scripts/claude-attention.sh` to:
 - Change the log file location
 - Modify desktop notification behavior
 - Add additional actions when notification triggers
@@ -162,7 +162,7 @@ Edit `claude-attention.sh` to:
 ## Troubleshooting
 
 ### Script doesn't execute
-- Ensure the script has executable permissions: `chmod +x claude-attention.sh`
+- Ensure the script has executable permissions: `chmod +x claude-scripts/claude-attention.sh`
 - Check the absolute path in settings.json is correct
 
 ### Browser doesn't open

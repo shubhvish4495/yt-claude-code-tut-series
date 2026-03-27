@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/ssaurav/go-tut/claude-tut/claude-attention.sh"
+            "command": "/Users/ssaurav/go-tut/claude-tut/claude-scripts/claude-attention.sh"
           }
         ]
       }

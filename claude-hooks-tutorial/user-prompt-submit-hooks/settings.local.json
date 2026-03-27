@@ -18,7 +18,7 @@
           
           {
             "type": "command",
-            "command": "/Users/ssaurav/go-tut/claude-tut/auto-commit.sh"
+            "command": "/Users/ssaurav/go-tut/claude-tut/claude-scripts/auto-commit.sh"
           }
         ]
       }

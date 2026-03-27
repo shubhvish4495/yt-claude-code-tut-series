@@ -31,6 +31,8 @@ For all server application commands, setup instructions, and detailed documentat
 - Development workflows
 - Troubleshooting guide
 
+**🧪 For testing practices and writing test cases, consult `dummy-server/docs/Testing-interface.md`**
+
 The server application demonstrates a real-world Go project that you can use to practice Claude Code workflows.
 
 ## Tutorial Content Overview
