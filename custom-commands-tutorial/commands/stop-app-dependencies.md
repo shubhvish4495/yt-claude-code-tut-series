@@ -1,1 +1,0 @@
-Stop this application on local using steps defined in docs/README.md. 

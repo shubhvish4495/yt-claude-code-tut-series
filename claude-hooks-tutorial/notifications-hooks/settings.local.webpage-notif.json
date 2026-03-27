@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go test:*)",
+      "Bash(make test:*)",
+      "Bash(git add:*)",
+      "Bash(git fetch:*)",
+      "Bash(git push:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/ssaurav/go-tut/claude-tut/claude-attention.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

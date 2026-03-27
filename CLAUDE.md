@@ -4,95 +4,74 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a simple Go tutorial project featuring basic structured logging. The project consists of a single main.go file that demonstrates JSON-formatted logging using Go's standard `log/slog` package.
+This is a Claude Code tutorial repository designed to help developers learn how to effectively use Claude Code for software development. The repository contains:
 
-## Common Commands
+1. **Tutorial Content**: Multiple tutorial modules demonstrating Claude Code capabilities
+2. **Example Project**: A complete Go server application in the `dummy-server/` directory
+3. **Custom Commands**: Examples of Claude Code slash commands in `.claude/commands/`
+4. **Hooks Tutorial**: Demonstrations of Claude Code automation hooks
 
-### Using Make (Recommended)
-```bash
-# Run the application
-make run
+## Repository Structure
 
-# Build the application
-make build
+- **Root Directory**: Claude Code tutorial documentation and configuration
+- **dummy-server/**: Complete example Go application with PostgreSQL integration
+- **claude-custom-commands-tutorial/**: Tutorial for creating custom Claude Code commands
+- **claude-hooks-tutorial/**: Tutorial for setting up Claude Code hooks
+- **.claude/**: Claude Code configuration and custom commands
 
-# Run full development workflow (format, vet, test, build)
-make dev
+## Working with the Example Server Application
 
-# Clean build artifacts
-make clean
+For all server application commands, setup instructions, and detailed documentation, refer to:
 
-# Run tests
-make test
+**📖 See `dummy-server/docs/README.md`** for complete information about:
+- Prerequisites and setup
+- Database configuration (PostgreSQL)
+- Running the application (Make commands, Go commands, Docker setup)
+- Environment variables and configuration
+- Development workflows
+- Troubleshooting guide
 
-# Format code and run static analysis
-make fmt
-make vet
+The server application demonstrates a real-world Go project that you can use to practice Claude Code workflows.
 
-# Download and organize dependencies
-make deps
+## Tutorial Content Overview
 
-# See all available targets
-make help
-```
+### Claude Code Learning Modules
 
-### Direct Go Commands
-```bash
-# Run the application
-go run main.go
+1. **Custom Commands Tutorial** (`claude-custom-commands-tutorial/`)
+   - Learn to create reusable slash commands
+   - Examples of common development workflows
+   - Best practices for command organization
 
-# Build the application
-go build -o claude-tut main.go
+2. **Hooks Tutorial** (`claude-hooks-tutorial/`)
+   - Event-driven automation with Claude Code
+   - Setting up development workflow hooks
+   - Integration examples
 
-# Run the built binary
-./claude-tut
-```
+3. **Example Server Application** (`dummy-server/`)
+   - Real-world Go application with PostgreSQL
+   - Complete development environment setup
+   - Practice ground for Claude Code workflows
+   - See `dummy-server/docs/README.md` for technical details
 
-### Go Module Management
-```bash
-# Initialize Go module (already done)
-go mod init github.com/ssaurav/go-tut/claude-tut
+### Claude Code Configuration
 
-# Download and organize dependencies
-go mod tidy
+- **.claude/commands/**: Custom slash commands for this project
+- **CLAUDE.md**: This file - provides context to Claude Code
+- **README.md**: Tutorial introduction and learning guide
 
-# Verify dependencies
-go mod verify
-```
+## Working with Claude Code
 
-### Development and Testing
-```bash
-# Format code
-go fmt ./...
+### Best Practices for This Repository
 
-# Run static analysis
-go vet ./...
+1. **Start with Tutorials**: Begin with the custom commands and hooks tutorials
+2. **Practice with Examples**: Use the dummy-server project to practice real scenarios
+3. **Experiment Safely**: This is a learning environment - try different approaches
+4. **Reference Documentation**: Use the comprehensive docs in each tutorial directory
 
-# Run tests (when test files exist)
-go test ./...
+### Common Claude Code Workflows to Practice
 
-# Run tests with verbose output
-go test -v ./...
-
-# Run a specific test
-go test -run TestFunctionName
-```
-
-## Code Architecture
-
-### Current Structure
-- **main.go**: Entry point containing a simple structured logger setup using `log/slog`
-  - Configures JSON output handler
-  - Enables source location logging
-  - Sets log level to Info
-  - Demonstrates basic logging functionality
-
-### Key Components
-- **Logging**: Uses Go's standard `log/slog` package for structured JSON logging
-  - JSON format for machine-readable logs
-  - Source location tracking enabled
-  - Info level logging configured
-
-## Go Version
-- Requires Go 1.25.7 or compatible version
-- Uses standard library packages only (no external dependencies)
+- Code analysis and understanding
+- Feature implementation and enhancement
+- Documentation creation and maintenance
+- Development workflow automation
+- Project structure organization

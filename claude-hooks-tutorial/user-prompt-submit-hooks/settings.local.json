@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(go test:*)",
+      "Bash(make test:*)",
+      "Bash(git add:*)",
+      "Bash(git fetch:*)",
+      "Bash(git push:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          
+          {
+            "type": "command",
+            "command": "/Users/ssaurav/go-tut/claude-tut/auto-commit.sh"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display dialog \"Claude Code needs your attention\" with title \"Claude Code\" buttons {\"OK\"} default button 1'"
+          }
+        ]
+      }
+    ]
+  }
+}
